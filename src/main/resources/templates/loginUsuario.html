@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@300;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/95ab7424cb.js"></script>
+    <title>Iniciar Sesion | FoodStore 🤑</title>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="../static/css/Login.css" rel="stylesheet"/>
+
+</head>
+<body class="bg-white">
+        <section>
+        <div class="row g-0">
+            <div class="col-lg-7 d-none d-lg-block">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+                        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active min-vh-100">
+
+                            <img src="../static/img/login/1.jpg" class="d-block w-100 foto" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 class="font-weight-bold">La más potente del mercado</h5>
+                                <a class="text-muted text-decoration-none" href="#"> Visita nuestra tienda</a>
+                            </div>
+                        </div>
+                        <div class="carousel-item min-vh-100">
+                            <img src="../static/img/login/2.jpg" class="d-block w-100 foto" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 class="font-weight-bold">Descubre la nueva generacion</h5>
+                                <a class="text-muted text-decoration-none" href="#"> Visita nuestra tienda</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-5 d-flex flex-column justify-content-around min-vh-100">
+                <!--LOGO-->
+                <div class="px-lg-5 pt-lg-4 pb-lg-2 p-4 w-100">
+                    <img src="../static/img/login/Logo.svg" class="img-fluid">
+                </div>
+                <!--FORM-->
+                <div class="px-lg-5 w-100 px-3">
+                    <h2 class="font-weight-bold mb-4">Bienvenido a Tienda X</h2>
+                    <form class="mb-4" action="/Login/Index" method="post">
+                        <input name="__RequestVerificationToken" type="hidden" value="CmnOzhu-aqSB9wY7tUao2Iz0msChtrhe_CwG3U8lNlaL-ammWwBX631--JiCq_-_8O46XQrjM9LpvFx6MOHtALpgq-1YOHBqgQe1NW6gEXk1" />    
+                        <div class="mb-4">
+                            <label for="exampleInputEmail1" class="form-label font-weight-bold">Email</label>
+                            <input type="email" class="form-control border-0 mb-2" name="NCorreo" placeholder="Ingresa tu email" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-4">
+                            <label for="exampleInputPassword1" class="form-label font-weight-bold">Contraseña</label>
+                            <input type="password" name="NPassword" class="form-control border-0 " placeholder="Ingresa tu contraseña" id="exampleInputPassword1">
+                            </div>
+                            <a href="#" id="emailHelp" class="form-text text-decoration-none text-muted">¿Has olvidado tu contraseña?</a>
+                        
+                        <div class="mb-4">
+                            <button type="submit" class="btn btn-primary w-100">Iniciar Sesion</button>
+                        </div>
+                     </form>
+                    <div class="form-floating mb-2 mt-2">
+
+                    </div>
+                    <p class="font-weight-bold text-center text-muted">O inicia sesión con:</p>
+                    <div class="d-flex justify-content-around">
+                        <button type="submit" class="me-2 btn btn-outline-light flex-grow-1 "><i class="fab fa-google lead me-3"></i>Google</button>
+                        <button type="submit" class="ms-2 btn btn-outline-light flex-grow-1 "><i class="fab fa-facebook-f lead me-3"></i>Facebook</button>
+                    </div>
+                </div>
+                <div class="text-center px-lg-5 pt-lg-3 pb-lg-0 p-2 w-100">
+                    <p class="d-inline-block mb-2">¿Todavia no tienes una cuenta?</p><a href="registroUsuario" class="text-light font-weight-bold text-decoration-none d-inline-block"> Crea una ahora</a>
+                </div>
+            </div>
+
+        </div>
+        </section>
+    <script src="../static/js/jquery-3.6.0.js"></script>
+
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

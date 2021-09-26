@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Registrarse</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="/css/Login.css" rel="stylesheet"/>
+
+</head>
+<body class="bg-dark-x">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="card shadow-lg bg-dark text-white rounded mt-5">
+                                <div class="card-header"><h3 class="text-center text-white font-weight-light my-4">Crear Cuenta</h3></div>
+                                <div class="card-body">
+                                <!-- cambiar action -->
+                                    <form action="/Login/Registrarse" method="post">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3 mb-md-0">
+                                                    <input class="form-control" id="inputFirstName" name="NNombres" type="text" placeholder="Nombres" value="" />
+                                                    <label for="inputFirstName">Nombres</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="inputLastName" name="NApellidos" type="text" placeholder="Apellidos" value="" />
+                                                    <label for="inputLastName">Apellidos</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="inputEmail" type="email" name="NCorreo" placeholder="name@example.com" value="" />
+                                            <label for="inputEmail">Correo</label>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3 mb-md-0">
+                                                    <input class="form-control" id="inputPassword" name="NPassword" type="password" placeholder="Contraseña" value="" />
+                                                    <label for="inputPassword">Password</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3 mb-md-0">
+                                                    <input class="form-control" id="inputPasswordConfirm" name="NConfirmarPassword" type="password" placeholder="Confirmar contraseña" value="" />
+                                                    <label for="inputPasswordConfirm">Confirmar Contraseña</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-floating">
+
+                                        </div>
+                                        <div class="mt-4 mb-0">
+                                            <div class="d-grid">
+                                                <button class="btn btn-primary btn-block" type="submit">Crear Cuenta</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="card-footer text-center py-3">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="js/jquery-3.6.0.js"></script>
+
+    <script src="../static/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
