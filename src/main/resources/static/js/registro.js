@@ -22,12 +22,12 @@
                 success: function (data) {
 
                     if (data) {
-						//muestra pantalla de carga
+						//termina pantalla de carga
                         $.LoadingOverlay("hide");
                         //location.href = "/login";
-                        //TODO: hacer un alert info para comprobar correo
+                        //TODO: hacer un reload o limpiar los inputs
                        $('#mensaje').addClass('alert alert-dark').html('📧Revisa tu correo para confirmar tu cuenta...')
-
+									
                     } else {
                         console.log("No se pudo guardar los cambios");
                     }

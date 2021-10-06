@@ -9,7 +9,7 @@
                 tabladata = $('#tabla').DataTable({
                     responsive:true,
                     "ajax": {
-                        "url": '@Url.Action("ListarMarca", "Home")',
+                        "url": '/api/v1/listarMarca',
                         "type": "GET",
                         "datatype": "json"
                     },

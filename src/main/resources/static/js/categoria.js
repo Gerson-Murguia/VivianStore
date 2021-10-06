@@ -8,7 +8,7 @@ $(document).ready(function () {
         tabladata = $('#tabla').DataTable({
             responsive:true,
             "ajax": {
-                "url": '/api/v1/listarCategoria")',
+                "url": '/api/v1/listarCategoria',
                 "type": "GET",
                 "datatype": "json"
             },

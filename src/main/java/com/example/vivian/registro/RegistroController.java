@@ -20,7 +20,7 @@ public class RegistroController {
 	@PostMapping
     public String register(@RequestBody RegistroRequest request) {
         //deberia retornar otra cosa como su httpstatus
-		//TODO:opcional, el correo se envia no async, buscar una forma de mandar el correo separado y no espere 5 
+		//DONE:El correo se envia de forma asincrona con @Async
 		return registroService.registrar(request);
     }
 
