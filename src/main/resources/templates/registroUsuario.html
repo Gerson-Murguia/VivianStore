@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width"/>
     <title>Registrarse</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="/css/Login.css" rel="stylesheet"/>
-
+	<link href="/css/Login.css" rel="stylesheet"/>
+	<link href="/font-awesome-free/css/all.min.css" rel="stylesheet" />
 </head>
-<body class="bg-dark-x">
+<body class="body bg-dark-x">
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-lg-6">
+                        <div class="col-lg-8">
                             <div class="card shadow-lg bg-dark text-white rounded mt-5">
                                 <div class="card-header"><h3 class="text-center text-white font-weight-light my-4">Crear Cuenta</h3></div>
                                 <div class="card-body">
@@ -53,8 +53,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-floating">
-										<span class="alert" id="mensaje"></span>
+                                        <div class="row mx-auto mb-3">
+										<span id="mensaje"></span>
                                         </div>
                                         <div class="mt-4 mb-0">
                                             <div class="d-grid">
@@ -64,7 +64,7 @@
                                     </form>
                                 </div>
                                 <div class="card-footer text-center py-3">
-
+									<span>Ya tienes una cuenta? Inicia Sesion</span>
                                 </div>
                             </div>
                         </div>
@@ -75,6 +75,8 @@
     </div>
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/font-awesome-free/js/all.js"></script>
+    <script src="/js/loadingoverlay.min.js"></script>
 	<script type="text/javascript" src="/js/registro.js"></script>
 </body>
 </html>

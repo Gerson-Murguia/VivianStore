@@ -17,26 +17,38 @@
                 url: '/api/v1/registro',
                 type: "POST",
                 data: JSON.stringify(request),
-                dataType: "json",
+               //el tipo de dato que devolvera el servidor dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
 
-                    if (data.resultado) {
-                        alert("aqui deberia funcionar o redirigir?");
+                    if (data) {
+						//muestra pantalla de carga
+                        $.LoadingOverlay("hide");
+                        //location.href = "/login";
+                        //TODO: hacer un alert info para comprobar correo
+                       $('#mensaje').addClass('alert alert-dark').html('📧Revisa tu correo para confirmar tu cuenta...')
+
                     } else {
-                        alert("No se pudo guardar los cambios");
+                        console.log("No se pudo guardar los cambios");
                     }
                 },
                 error: function (error) {
-                    console.log(error);
+                    console.log("mando error"+error);
+                    $.LoadingOverlay("hide");
                 },
                 beforeSend: function () {
-					//aqui poner el loading overlay
+					//muestra pantalla de carga, el proceso de envio de correo
+					//demora 5 seg, tal vez mandar el email aparte sea mejor?
+					$.LoadingOverlay("show",{
+						image:"",
+						text:"Registrando...",
+						fontawesome: "fas fa-circle-notch fa-spin"
+					});
                 }
             });
 
         }
-        
+
 $('#txtpassword, #txtconfpassword').on('keyup', function () {
   if ($('#txtpassword').val() == $('#txtconfpassword').val()) {
     $('#mensaje').html('');

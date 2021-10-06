@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -20,11 +19,15 @@ public class RegistroController {
 	
 	@PostMapping
     public String register(@RequestBody RegistroRequest request) {
-        return registroService.registrar(request);
+        //deberia retornar otra cosa como su httpstatus
+		//TODO:opcional, el correo se envia no async, buscar una forma de mandar el correo separado y no espere 5 
+		return registroService.registrar(request);
     }
 
 	@GetMapping(path = "confirmar")
 	public String confirmar(@RequestParam("token") String token) {
+		
+		//TODO:redirigir a una pagina html con un mensaje, preferentemente vista login
 		return registroService.confirmToken(token);
 	}
 	

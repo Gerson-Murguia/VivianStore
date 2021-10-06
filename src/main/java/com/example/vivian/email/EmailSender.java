@@ -1,6 +1,9 @@
 package com.example.vivian.email;
 
-public interface EmailSender {
+import org.springframework.scheduling.annotation.Async;
 
+public interface EmailSender {
+	
+	@Async
 	void send(String para,String email);
 }

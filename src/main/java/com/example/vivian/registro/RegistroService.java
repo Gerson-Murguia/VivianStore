@@ -4,6 +4,8 @@ package com.example.vivian.registro;
 import java.time.LocalDateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.view.RedirectView;
+
 import com.example.vivian.email.EmailSender;
 import com.example.vivian.email.EmailValidator;
 import com.example.vivian.models.AppUsuario;
@@ -27,11 +29,13 @@ public class RegistroService {
 		
 		boolean isValidEmail= emailValidator.test(request.getEmail());
 		
+		//si el email no es valido,tira error, modificar para dar advertencia
 		if (!isValidEmail) {
 			throw new IllegalStateException("email not valid");
 		}
 		
-		
+		//por defecto el usuario es de rol USUARIO deberia ser rol cliente
+		//TODO:implementar rol admin
 		String token= appUsuarioService.registroUsuario(
 								new AppUsuario(
 										request.getNombre(),
