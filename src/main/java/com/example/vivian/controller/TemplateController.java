@@ -12,14 +12,14 @@ public class TemplateController {
 	@GetMapping("/login")
 	public String getLoginView() {
 		
-		//nombre de la vista html
+	
 		return "login";
 	}
 	
 	@GetMapping("/registro")
 	public String getRegistroView() {
 		
-		//nombre de la vista html
+	
 		return "registroUsuario";
 	}
 	
@@ -27,7 +27,7 @@ public class TemplateController {
 	public String getIndexView() {
 		//TODO: cambiar index segun sea ADMIN o CLIENTE
 		//nombre de la vista html
-		//por ahora index te redirige a index admin
+		//por ahora index es el index de administrador
 		return "index";
 	}
 	

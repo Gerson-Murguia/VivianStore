@@ -8,7 +8,7 @@
                 //convertir tabla #tabla en Datatable
                 tabladata = $('#tabla').DataTable({
                     responsive:true,
-                    dom: 'Bfrtilp',       
+                    dom: 'frtilpB',      
 			        buttons:[ 
 						{
 							extend:    'excelHtml5',
@@ -113,7 +113,8 @@
 
 
         $(document).on('click', '.btn-editar', function (event) {
-            //guarda los valores del data-informacion del boton editar
+            //guarda los valores del data-informacion(todos los valores de la columna) del boton editar
+            //obtiene el data-informacion(no se pone data-,solo informacion)
             var json = $(this).data("informacion");
 
             abrirModal(json);
@@ -125,7 +126,6 @@
             $("#txtid").val(0);
             $("#txtdescripcion").val("");
             $("#cboEstado").val(1);
-
             //si el data-informacion tiene valores(se va a editar)
             if (json != null) {
 

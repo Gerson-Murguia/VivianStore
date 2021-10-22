@@ -3,7 +3,7 @@
       layout:decorate="~{layout/_layout}">
 <head>
 <meta charset="utf-8">
-<title>Marca</title>
+<title>Categorias | Restaurante Vivian</title>
 </head>
 <body>
 <!--TODO: arreglar Links -->
@@ -21,7 +21,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-sm-12">
-                <button class="btn btn-success" type="button" onclick="abrirModal(null)">Crear Nuevo</button>
+                <button class="btn btn-success btn-sm" type="button" onclick="abrirModal(null)">Crear Categoria</button>
             </div>
         </div>
 
@@ -29,10 +29,9 @@
         <table id="tabla" class="display responsive" style="width:100%">
             <thead>
                 <tr>
-
                     <th>Descripcion</th>
                     <th>Activo</th>
-                    <th></th>
+                    <th>Opciones</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -47,7 +46,7 @@
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
                 <h5 class="modal-title" id="exampleModalLabel">Categoria</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <button type="button" class="close btn-dark" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

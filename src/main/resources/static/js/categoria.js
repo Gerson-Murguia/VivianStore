@@ -7,7 +7,7 @@ $(document).ready(function () {
 
         tabladata = $('#tabla').DataTable({
             responsive:true,
-            dom: 'Bfrtilp',       
+            dom: 'frtilpB',       
 	        buttons:[ 
 				{
 					extend:    'excelHtml5',
@@ -31,12 +31,14 @@ $(document).ready(function () {
             "ajax": {
                 "url": '/api/v1/listarCategoria',
                 "type": "GET",
-                "datatype": "json"
+                "datatype": "json",
+                //TODO: Averiguar para que se necesita el dataSrc "" si requiere un array de objetos
+                dataSrc:""
             },
             "columns": [
-                { "data": "Descripcion" },
+                { "data": "descripcion" },
                 {
-                    "data": "Activo", "render": function (data) {
+                    "data": "esActivo", "render": function (data) {
                         if (data) {
                             return '<span class="badge bg-success">Activo</span>'
                         } else {
@@ -45,7 +47,7 @@ $(document).ready(function () {
                     }
                 },
                 {
-                    "data": "IdCategoria", "render": function (data, type, row, meta) {
+                    "data": "idCategoria", "render": function (data, type, row, meta) {
 
                         return $("<button>").addClass("btn btn-primary btn-editar btn-sm").append(
                             $("<i>").addClass("fas fa-pen")
@@ -57,8 +59,7 @@ $(document).ready(function () {
 
                     },
                     "orderable": false,
-                    "searchable": false,
-                    "width": "90px"
+                    "searchable": false
                 }
 
             ],
@@ -99,6 +100,7 @@ $(document).on('click', '.btn-eliminar', function (event) {
         type: "POST",
         data: JSON.stringify({ id: json.IdCategoria}),
         dataType: "json",
+        dataSrc:"",
         contentType: "application/json; charset=utf-8",
         success: function (data) {
 
