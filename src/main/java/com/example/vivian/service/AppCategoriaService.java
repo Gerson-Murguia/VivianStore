@@ -20,9 +20,9 @@ public class AppCategoriaService {
 		return repo.findAll();
 	}
 	
-	public void save(AppCategoria appCategoria) {
+	public AppCategoria save(AppCategoria appCategoria) {
 	
-		repo.save(appCategoria);
+		return repo.save(appCategoria);
 	}
 	
 	public AppCategoria getCategoria(Long id) {

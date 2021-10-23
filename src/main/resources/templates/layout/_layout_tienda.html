@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="img/iconos/favicon.ico">
+<title> 🍽 VivianRestaurant</title>
+	<!-- CSS AQUI -->
+<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="/css/Site.css" rel="stylesheet" type="text/css"/>
+<link href="/css/font-awesome-free/css/all.min.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-4" href="/vivian/" style="width:200px !important">VIVIAN RESTAURANT</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-dark btn-ver-categoria" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i>Categorias</button>
+
+            <!-- Navbar-->
+                    <form action="/vivian/carrito" method="post" class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                        <button class="btn btn-close-white" type="submit">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill contador-carrito">0</span>
+                        </button>
+                    </form>
+
+                    <ul class="navbar-nav me-2">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/vivian/">Ir a Tienda</a></li>
+                                <li><a class="dropdown-item" href="/vivian/compras"> Mis Compras</a>
+                                </li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+        </div>
+    </nav>
+    <main class="container-fluid" layout:fragment="content">
+        
+    </main>
+    <div class="position-fixed top-0 end-0 p-3 mt-5" style="z-index: 5">
+        <div id="toast-carrito" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">
+            <div class="toast-body bg-success text-white">
+                <div class="d-flex">
+                    <i class="fas fa-check fa-2x"></i> <label style="margin-left: 10px !important">Se añadió al carrito!</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="position-fixed top-0 end-0 p-3 mt-5" style="z-index: 5">
+        <div id="toast-alerta" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+            <div class="toast-body bg-danger text-white">
+                <div class="d-flex">
+                    <i class="fas fa-exclamation-circle fa-2x"></i> <label id="mensaje-error" class="ml-2" style="margin-left: 10px !important">Error</label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- scripts globales -->
+    <script src="/js/jquery-3.6.0.min.js"></script>
+	<script src="/js/bootstrap.bundle.min.js"></script>
+	<script src="/font-awesome-free/js/all.min.js"></script>
+	<script src="/js/SweetAlert/sweetalert.min.js"></script>
+	<script src="/js/loadingoverlay.min.js"></script>
+    <script src="/js/_layout_tienda.js"></script>
+    <th:block layout:fragment="script"/>
+</body>
+</html>
+    

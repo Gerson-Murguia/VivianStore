@@ -1,4 +1,4 @@
-package com.example.vivian.registro;
+package com.example.vivian.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -6,12 +6,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.vivian.registro.RegistroRequest;
+import com.example.vivian.registro.RegistroService;
+
 import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping(path = "api/v1/registro")
 @AllArgsConstructor
-public class RegistroController {
+public class RegistroRestController {
 	//se registra una persona
 	
 	private RegistroService registroService;
