@@ -6,4 +6,6 @@ import com.example.vivian.models.AppProducto;
 
 public interface AppProductoRepository extends JpaRepository<AppProducto, Long> {
 
+	//void actualizarImagen(int idProducto, String rutaImagen);
+
 }

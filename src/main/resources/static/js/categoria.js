@@ -26,7 +26,7 @@ $(document).ready(function () {
 					text:      '<i class="fa fa-print"></i> ',
 					titleAttr: 'Imprimir',
 					className: 'btn btn-info'
-				},
+				}
 			],	
             "ajax": {
                 "url": '/api/v1/listarCategoria',
@@ -78,14 +78,13 @@ $(document).on('click', '.btn-editar', function (event) {
 });
 
 function abrirModal(json) {
-    $("#txtid").val(0);
+    $("#txtid").val();
     $("#txtdescripcion").val("");
     $("#cboEstado").val(1);
 	
 	//al editar
 	//asegurarse que los nombres sean igual al data-informacion
     if (json != null) {
-
         $("#txtid").val(json.idCategoria);
         $("#txtdescripcion").val(json.descripcion);
         $("#cboEstado").val(json.esActivo == true ? 1 : 0);
@@ -98,51 +97,47 @@ $(document).on('click', '.btn-eliminar', function (event) {
     var json = $(this).data("informacion")
 	
     jQuery.ajax({
-        url: '/api/v1/eliminarCategoria',
-        type: "POST",
-        data: JSON.stringify({ id: json.idCategoria}),
-        dataType: "json",
+        url: '/api/v1/eliminarCategoria/'+json.idCategoria,
+        type: "DELETE",
+        //data: JSON.stringify({ id: json.idCategoria}),
+        //dataType: "json",
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-
-            if (data.resultado) {
+	
                 tabladata.ajax.reload();
-            } else {
-                alert("No se pudo eliminar")
-            }
+                swal("Exito", "Se elimino la categoria", "success")
         },
         error: function (error) {
             console.log(error)
+			swal("Error", "No se elimino la categoria", "error")
+
         },
         beforeSend: function () {
-
+			
         },
     });
 });
 
 function Guardar() {
     var request = {
-        appCategoria: {
-            idCategoria: $("#txtid").val(0),
+            idCategoria: $("#txtid").val(),
             descripcion: $("#txtdescripcion").val(),
-            esActivo: parseInt($("#cboEstado").val()) == 1 ? true : false
-        }
+            esActivo: parseInt($("#cboEstado").val()) == 1 ? true : false 
     }
-
     jQuery.ajax({
         url: '/api/v1/guardarCategoria',
         type: "POST",
         data: JSON.stringify(request),
-        dataType: "json",
         contentType: "application/json; charset=utf-8",
         success: function (data) {
 
-            if (data.resultado) {
+            if (data) {
                 tabladata.ajax.reload();
                 $('#FormModal').modal('hide');
+                swal("Exito", "Se guardo la categoria", "success")
+
             } else {
-                alert("No se pudo guardar los cambios")
-                //swal("Mensaje", "No se pudo guardar los cambios", "warning")
+                swal("Error", "No se pudo guardar los cambios", "warning")
             }
         },
         error: function (error) {

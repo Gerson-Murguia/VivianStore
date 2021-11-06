@@ -4,14 +4,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,5 +30,11 @@ public class AppCategoria {
     @Column(columnDefinition = "bit default 1")
     private boolean esActivo;
     @CreationTimestamp
-    private LocalDate fechaRegistro;
+    @Column(updatable = false)
+    private LocalDateTime fechaRegistro;
+    @UpdateTimestamp
+    private LocalDateTime fechaUpdate;
+    
+    @OneToMany(mappedBy = "oCategoria")
+    private Set<AppProducto> productos;
 }

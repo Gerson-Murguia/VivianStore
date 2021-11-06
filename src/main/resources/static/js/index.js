@@ -1,6 +1,6 @@
 $(document).ready(function() {
     jQuery.ajax({
-        url: 'api/v1/listarProductos',
+        url: 'api/v1/listarProducto/0',
         type: "GET",
         data: null,
         dataType: "json",

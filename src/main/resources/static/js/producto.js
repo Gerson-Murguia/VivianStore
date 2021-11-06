@@ -19,26 +19,46 @@
         }
 
         $(document).ready(function () {
-
-
-
-
             tabladata = $('#tabla').DataTable({
                     responsive:true,
+                    dom: 'frtilpB', 
+                    buttons:[ 
+						{
+							extend:    'excelHtml5',
+							text:      '<i class="fas fa-file-excel"></i> ',
+							titleAttr: 'Exportar a Excel',
+							className: 'btn btn-success'
+						},
+						{
+							extend:    'pdfHtml5',
+							text:      '<i class="fas fa-file-pdf"></i> ',
+							titleAttr: 'Exportar a PDF',
+							className: 'btn btn-danger'
+						},
+						{
+							extend:    'print',
+							text:      '<i class="fa fa-print"></i> ',
+							titleAttr: 'Imprimir',
+							className: 'btn btn-info'
+						}
+					],	
                     "ajax": {
-                        "url": '@Url.Action("ListarProducto", "Home")',
+						//por default es 0 o sin valor y asignar en controller
+                        "url": '/api/v1/listarProducto/0',
                         "type": "GET",
-                        "datatype": "json"
+                        "datatype": "json",
+                         dataSrc:""
+
                     },
                     "columns": [
                         { "data": "Nombre" },
                         { "data": "Descripcion" },
-                        {
+                        /*{
                             "data": "oMarca", render: function (data) {
 
                                 return data.Descripcion
                             }
-                        },
+                        },*/
                         {
                             "data": "oCategoria", render: function (data) {
                                 return data.Descripcion
@@ -79,14 +99,14 @@
             });
 
             jQuery.ajax({
-                url: '@Url.Action("ListarCategoria", "Home")',
+                url: '/api/v1/listarCategoria',
                 type: "GET",
                 data: null,
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     $.each(data.data, function (index, value) {
-                        $("<option>").attr({ "value": value.IdCategoria }).text(value.Descripcion).appendTo("#cbocategoria");
+                        $("<option>").attr({ "value": value.idCategoria }).text(value.descripcion).appendTo("#cbocategoria");
                     });
                 },
                 error: function (error) {
@@ -94,11 +114,11 @@
                 },
                 beforeSend: function () {
 
-                },
+                }
             });
 
             jQuery.ajax({
-                url: '@Url.Action("ListarMarca", "Home")',
+                url: '/api/v1/listarMarca',
                 type: "GET",
                 data: null,
                 dataType: "json",
@@ -123,12 +143,12 @@
 
         $(document).on('click', '.btn-editar', function (event) {
             var json = $(this).data("informacion")
-
+			console.log(json)
             abrirModal(json)
         });
 
         function abrirModal(json) {
-            $("#txtid").val(0);
+            $("#txtid").val();
             $("#img_producto").attr({ "src": "" });
             $("#txtnombre").val("");
             $("#txtdescripcion").val("");
@@ -143,8 +163,6 @@
             if (json != null) {
                 console.log(json)
                 $("#txtid").val(json.IdProducto);
-
-
                 $("#img_producto").attr({ "src": "data:image/" + json.extension + ";base64," + json.base64});
                 $("#txtnombre").val(json.Nombre);
                 $("#txtdescripcion").val(json.Descripcion);
@@ -191,33 +209,33 @@
 
         function Guardar() {
 
-            var ImagenSeleccionada = ($("#imgproducto"))[0].files[0];
+            var imagenSeleccionada = ($("#imgproducto"))[0].files[0];
 
             var objeto = {
-                IdProducto: $("#txtid").val(),
-                Nombre: $("#txtnombre").val(),
-                Descripcion: $("#txtdescripcion").val(),
-                oMarca: {IdMarca : $("#cbomarca option:selected").val()},
-                oCategoria: { IdCategoria : $("#cbocategoria option:selected").val() },
-                Precio: $("#txtprecio").val(),
-                Stock: $("#txtstock").val(),
-                RutaImagen : "",
-                Activo: parseInt($("#cboEstado").val()) == 1 ? true : false
+                idProducto: $("#txtid").val(),
+                nombre: $("#txtnombre").val(),
+                descripcion: $("#txtdescripcion").val(),
+                //oMarca: {idMarca : $("#cbomarca option:selected").val()},
+                oCategoria: { idCategoria : $("#cbocategoria option:selected").val() },
+                precio: $("#txtprecio").val(),
+                stock: $("#txtstock").val(),
+                rutaImagen : "",
+                esActivo: parseInt($("#cboEstado").val()) == 1 ? true : false
             }
 
             var request = new FormData();
-            request.append("imagenArchivo", ImagenSeleccionada);
-            request.append("objeto", JSON.stringify(objeto));
+            request.append("imagenArchivo", imagenSeleccionada);
+            request.append("appProducto", JSON.stringify(objeto));
 
             jQuery.ajax({
-                url: '@Url.Action("GuardarProducto", "Home")',
+                url: '/api/v1/guardarProducto',
                 type: "POST",
                 data: request,
                 processData: false,
                 contentType : false,
                 success: function (data) {
 
-                    if (data.resultado) {
+                    if (data) {
                         tabladata.ajax.reload();
                         $('#FormModal').modal('hide');
                     } else {
@@ -225,7 +243,8 @@
                     }
                 },
                 error: function (error) {
-                    console.log(error)
+                    console.log("Error: "+error)
+                    alert("No se pudo guardar los cambios")
                 },
                 beforeSend: function () {
 
