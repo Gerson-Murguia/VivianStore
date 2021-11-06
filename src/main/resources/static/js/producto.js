@@ -51,8 +51,8 @@
 
                     },
                     "columns": [
-                        { "data": "Nombre" },
-                        { "data": "Descripcion" },
+                        { "data": "nombre" },
+                        { "data": "descripcion" },
                         /*{
                             "data": "oMarca", render: function (data) {
 
@@ -60,14 +60,14 @@
                             }
                         },*/
                         {
-                            "data": "oCategoria", render: function (data) {
-                                return data.Descripcion
+                            "data": "idCategoria", render: function (data) {
+                                return data//.descripcion
                             }
                         },
-                        { "data": "Precio" },
-                        { "data": "Stock" },
+                        { "data": "precio" },
+                        { "data": "stock" },
                         {
-                            "data": "Activo", "render": function (data) {
+                            "data": "esActivo", "render": function (data) {
                                 if (data) {
                                     return '<span class="badge bg-success">Activo</span>'
                                 } else {
@@ -76,7 +76,7 @@
                             }
                         },
                         {
-                            "data": "IdProducto", "render": function (data, type, row, meta) {
+                            "data": "idProducto", "render": function (data, type, row, meta) {
 
                                 return $("<button>").addClass("btn btn-primary btn-editar btn-sm").append(
                                     $("<i>").addClass("fas fa-pen")
@@ -105,12 +105,12 @@
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    $.each(data.data, function (index, value) {
-                        $("<option>").attr({ "value": value.idCategoria }).text(value.descripcion).appendTo("#cbocategoria");
+                    $.each(data, function (index, value) {
+                        $("<option>").attr({ "value": value.idCategoria }).attr({"data-informacion":JSON.stringify(data)}).text(value.descripcion).appendTo("#cbocategoria");
                     });
                 },
                 error: function (error) {
-                    console.log(error)
+                    console.log(error);
                 },
                 beforeSend: function () {
 
@@ -124,8 +124,8 @@
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    $.each(data.data, function (index, value) {
-                        $("<option>").attr({ "value": value.IdMarca }).text(value.Descripcion).appendTo("#cbomarca");
+                    $.each(data, function (index, value) {
+                        $("<option>").attr({ "value": value.idMarca }).attr('data-info', data).text(value.descripcion).appendTo("#cbomarca");
                     });
                 },
                 error: function (error) {
@@ -162,15 +162,16 @@
 
             if (json != null) {
                 console.log(json)
-                $("#txtid").val(json.IdProducto);
+                $("#txtid").val(json.idProducto);
+                //TODO: el json.extension no se esta pasando
                 $("#img_producto").attr({ "src": "data:image/" + json.extension + ";base64," + json.base64});
-                $("#txtnombre").val(json.Nombre);
-                $("#txtdescripcion").val(json.Descripcion);
-                $("#cbomarca").val(json.oMarca.IdMarca);
-                $("#cbocategoria").val(json.oCategoria.IdCategoria);
-                $("#txtprecio").val(json.Precio);
-                $("#txtstock").val(json.Stock);
-                $("#cboEstado").val(json.Activo == true ? 1 : 0);
+                $("#txtnombre").val(json.nombre);
+                $("#txtdescripcion").val(json.descripcion);
+                //$("#cbomarca").val(json.oMarca.idMarca);
+                $("#cbocategoria").val(json.idCategoria);
+                $("#txtprecio").val(json.precio);
+                $("#txtstock").val(json.stock);
+                $("#cboEstado").val(json.esActivo == true ? 1 : 0);
             }
 
             $('#FormModal').modal('show');
@@ -181,7 +182,7 @@
 
             if (confirm('¿Esta seguro de eliminar?')) {
                  jQuery.ajax({
-                        url: '@Url.Action("EliminarProducto", "Home")',
+                        url: 'api/v1/eliminarProducto',
                         type: "POST",
                         data: JSON.stringify({ id: json.IdProducto}),
                         dataType: "json",
@@ -216,7 +217,7 @@
                 nombre: $("#txtnombre").val(),
                 descripcion: $("#txtdescripcion").val(),
                 //oMarca: {idMarca : $("#cbomarca option:selected").val()},
-                oCategoria: { idCategoria : $("#cbocategoria option:selected").val() },
+               	idCategoria : $("#cbocategoria option:selected").val(),
                 precio: $("#txtprecio").val(),
                 stock: $("#txtstock").val(),
                 rutaImagen : "",

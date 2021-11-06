@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -20,15 +23,18 @@ public class AppProducto {
     private int idProducto;
     private String nombre;
     private String descripcion;
-    @ManyToOne
+   /* @ManyToOne(targetEntity = AppCategoria.class)
     @JoinColumn(name="id_categoria",nullable = false,foreignKey = @ForeignKey(name="FK_CATEGORIA_PRODUCTO"))
-    private AppCategoria oCategoria;
+    private AppCategoria oCategoria;*/
+    private Long idCategoria;
     @Column(columnDefinition = "decimal(10,2) default 0")
     private double precio;
     private int  stock;
     private String rutaImagen;
     private boolean esActivo;
+    @Transient
     private String base64;
+    @Transient
     private String extension;
     @CreationTimestamp
     @Column(updatable = false)

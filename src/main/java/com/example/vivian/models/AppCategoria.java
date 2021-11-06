@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,6 +36,6 @@ public class AppCategoria {
     @UpdateTimestamp
     private LocalDateTime fechaUpdate;
     
-    @OneToMany(mappedBy = "oCategoria")
-    private Set<AppProducto> productos;
+   /* @OneToMany(mappedBy = "oCategoria",fetch = FetchType.LAZY)
+    private Set<AppProducto> productos;*/
 }

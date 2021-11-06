@@ -10,6 +10,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -96,20 +97,20 @@ public class AdminRestController {
 	public ResponseEntity<AppProducto> guardarProducto(@RequestPart("imagenArchivo") MultipartFile imagen,@RequestPart("appProducto") String appProducto) throws IOException{
 		//TODO: pasar todo al productoservice en lugar de el rest api
 		//deserializar json
-		System.out.println(appProducto);
+		System.out.println("json: "+appProducto);
 		AppProducto prod=new ObjectMapper().readValue(appProducto, AppProducto.class);
-		
+		System.out.println("Objeto deserializado: "+prod);
 		//path relativo a imagenes y path absoluto
 		String guardarEnRuta="src/main/resources/static/img/productos/";
 		String rutaFisica=Paths.get(guardarEnRuta).toAbsolutePath().toString();
-		System.out.println("Ruta fisica:" + rutaFisica);
+		System.out.println("Ruta fisica: " + rutaFisica);
 		
 		//si el directorio no existe, se crea
 		File f=new File(rutaFisica);
 		if(!f.isDirectory()) {
 			f.mkdirs();
 		}else {
-			System.out.println("Directorio existe");
+			System.out.println("Directorio existe: "+f.getAbsolutePath());
 		}
 		//TODO: Se crea o se actualiza
 		prod=productoService.save(prod);
@@ -117,19 +118,15 @@ public class AdminRestController {
 		//reemplaza la ruta de imagen por la imagen especificada
 		if(imagen!=null && prod.getIdProducto()!=0) {
 			String extension="."+Files.getFileExtension(imagen.getOriginalFilename());
-			guardarEnRuta=guardarEnRuta+"/"+prod.getIdProducto()+extension;
-			prod.setRutaImagen(guardarEnRuta);
+			guardarEnRuta=guardarEnRuta+prod.getIdProducto()+extension;
 			
-			//ruta fisica de la imagen 
-			//D:\Workspace Spring\WebServiceSpringAndroid\VivianStore\src\main\resources\static\img\productos\+idproducto+.jpg
-			File f1=new File(guardarEnRuta);
-			imagen.transferTo(f1);
+			Path ubicacion=Paths.get(rutaFisica+"/"+prod.getIdProducto()+extension);
+			imagen.transferTo(ubicacion);
 			
-			//TODO:metodo de actualizarRutaImagen
 			prod.setRutaImagen(guardarEnRuta);
 			productoService.save(prod);
+			System.out.println("Imagen guardada con exito");
 		}
-		//TODO:pasar la categoria y demas en el guardar producto.js
 		
 		return new ResponseEntity<AppProducto>(prod,HttpStatus.OK);
 	}
