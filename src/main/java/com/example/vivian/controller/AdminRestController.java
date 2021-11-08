@@ -126,8 +126,7 @@ public class AdminRestController {
 			prod.setRutaImagen(guardarEnRuta);
 			productoService.save(prod);
 			System.out.println("Imagen guardada con exito");
-		}
-		
+		}	
 		return new ResponseEntity<AppProducto>(prod,HttpStatus.OK);
 	}
 }
