@@ -148,7 +148,7 @@
         });
 
         function abrirModal(json) {
-            $("#txtid").val();
+            $("#txtid").val(0);
             $("#img_producto").attr({ "src": "" });
             $("#txtnombre").val("");
             $("#txtdescripcion").val("");
@@ -163,8 +163,9 @@
             if (json != null) {
                 console.log(json)
                 $("#txtid").val(json.idProducto);
-                //TODO: el json.extension no se esta pasando
+                //TODO: se debe hacer que el input de la imagen pase empty
                 $("#img_producto").attr({ "src": "data:image/" + json.extension + ";base64," + json.base64});
+                $("#imgproducto").val("");
                 $("#txtnombre").val(json.nombre);
                 $("#txtdescripcion").val(json.descripcion);
                 //$("#cbomarca").val(json.oMarca.idMarca);
@@ -182,21 +183,20 @@
 
             if (confirm('¿Esta seguro de eliminar?')) {
                  jQuery.ajax({
-                        url: 'api/v1/eliminarProducto',
-                        type: "POST",
-                        data: JSON.stringify({ id: json.IdProducto}),
-                        dataType: "json",
+                        url: '/api/v1/eliminarProducto/'+json.idProducto,
+                        type: "DELETE",
+                        //data: JSON.stringify({ id: json.idProducto}),
+                        //dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
 
-                            if (data.resultado) {
-                                tabladata.ajax.reload();
-                            } else {
-                                alert("No se pudo eliminar")
-                            }
+                           
+                            tabladata.ajax.reload();
+                         	swal("Exito", "Se elimino el producto: "+data.nombre, "success")
                         },
                         error: function (error) {
                             console.log(error)
+                			swal("Error", "No se elimino el producto", "error")
                         },
                         beforeSend: function () {
 

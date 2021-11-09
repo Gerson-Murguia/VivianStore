@@ -44,6 +44,32 @@ public class AppProductoService {
 		prodrepo.deleteById(id);
 	}
 	
+	//modifica todo excepto la ruta imagen
+	public AppProducto modificar(AppProducto prod) {
+		// TODO Auto-generated method stub
+		System.out.println(prod.getFechaUpdate());
+		AppProducto producto=this.getProducto(prod.getIdProducto());
+		System.out.println(producto.getFechaUpdate());
+		
+		producto.setIdProducto(prod.getIdProducto());
+		producto.setDescripcion(prod.getDescripcion());
+		producto.setIdCategoria(prod.getIdCategoria());
+		producto.setNombre(prod.getNombre());
+		producto.setPrecio(prod.getPrecio());
+		producto.setStock(prod.getStock());
+		producto.setEsActivo(prod.isEsActivo());
+		return prodrepo.save(producto);
+	}
+
+	public void guardarImagen(Long id, String guardarEnRuta) {
+		// TODO Auto-generated method stub
+		AppProducto prod=this.getProducto(id);
+		prod.setRutaImagen(guardarEnRuta);
+		this.save(prod);
+	}
+
+
+	
 	
 	/*
 	public boolean actualizarRutaImagen(AppProducto oProducto) {
