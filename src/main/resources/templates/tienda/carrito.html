@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/_layout_tienda}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="img/iconos/favicon.ico">
+<title>Carrito| 🍽 Vivian Restaurant</title>
+</head>      
+<div layout:fragment="content"> 
+<div class="row mt-5 pt-5 p-2">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="product-details mr-2">
+                        <div class="d-flex justify-content-between">
+                            <span class="ml-2">Detalle Compra</span>
+                            <a class="btn btn-danger" href="/vivian/">Volver</a>
+                        </div>
+                        <hr class="mt-2 mb-2">
+                        <div class="justify-content-start mb-2">
+                            Tienes <span id="cantidad-articulos" class="ml-1">0</span> artículo(s) en tu carrito
+                        </div>
+                        <div id="productos-seleccionados">
+                            <!--Aqui van los productos del carrito-->
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-12">
+                                    <div class="payment-info">
+                                        <div class="d-flex justify-content-between align-items-center"><span>Detalle de Tarjeta</span></div>
+                                        <span class="type d-block mt-3 mb-1">Tipo de tarjeta</span>
+                                        <label class="radio"> <input type="radio" name="card" value="payment" checked> <span><img width="60" src="@Url.Content("~/Imagenes/Tarjetas/master.png")" /></span> </label>
+                                        <label class="radio ml-2"> <input type="radio" name="card" value="payment"> <span><img width="60" src="@Url.Content("~/Imagenes/Tarjetas/visa.png")" /></span> </label>
+                                        <div>
+                                            <label class="credit-card-label mb-1 mt-2">Nombre del Titular</label>
+                                            <input type="text" class="form-control credit-inputs" placeholder="Nombre" id="trj_nombre">
+                                        </div>
+                                        <div>
+                                            <label class="credit-card-label mb-1 mt-2">Número de tarjeta</label>
+                                            <input type="text" class="form-control credit-inputs" placeholder="0000 0000 0000 0000" id="trj_numero">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label class="credit-card-label mb-1 mt-2">Vigencia</label>
+                                                <input type="text" class="form-control credit-inputs" placeholder="12/24" id="trj_vigencia">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="credit-card-label mb-1 mt-2">CVV</label>
+                                                <input type="text" class="form-control credit-inputs" placeholder="342" id="trj_cvv">
+                                            </div>
+                                        </div>
+                                        <hr class="line">
+                                        <div class="d-flex justify-content-between information"><span>Total a Pagar</span><span id="totalPagar">S/. 0</span></div>
+                                        <button class="btn btn-primary btn-block mt-3" id="btnProcesarPago" type="button">Procesar Pago</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!--MODAL-->
+
+<div class="modal fade" id="mdprocesopago" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Datos para envio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label pt-0">Departamento:</label>
+                        <select id="cboDepartamento" class="form-select control-validar"></select>
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Provincia:</label>
+                        <select id="cboProvincia" class="form-select control-validar"></select>
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Distrito:</label>
+                        <select id="cboDistrito" class="form-select control-validar"></select>
+                    </div>
+                    <div class="mb-1">
+                        <label for="message-text" class="col-form-label">Contacto:</label>
+                        <input type="text" class="form-control control-validar" autocomplete="off" id="txtContacto">
+                    </div>
+                    <div class="mb-1">
+                        <label for="message-text" class="col-form-label">Telefono:</label>
+                        <input type="text" class="form-control control-validar" autocomplete="off" id="txtTelefono">
+                    </div>
+                    <div class="mb-1">
+                        <label for="message-text" class="col-form-label">Direccion:</label>
+                        <input type="text" class="form-control control-validar" autocomplete="off" id="txtDireccion">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Regresar</button>
+                <button type="button" class="btn btn-success" id="btnConfirmarCompra">Confirmar Compra</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<th:block layout:fragment="script">
+    <script src="/js/carrito.js"></script>
+</th:block>
+</body>
+</html>
+

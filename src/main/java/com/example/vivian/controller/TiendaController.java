@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.vivian.service.AppProductoService;
@@ -19,7 +20,7 @@ public class TiendaController {
 
 	@GetMapping("/")
 	public String index(Model model) {
-		return "tienda";
+		return "tienda/tienda";
 	}
 	
 	@GetMapping("/producto/{idproducto}")
@@ -28,15 +29,15 @@ public class TiendaController {
 		return "tienda/producto";
 	}
 	
-	@GetMapping("/carrito")
+	@PostMapping("/carrito")
 	public String carrito(Model model) {
 		
-		return "carrito";
+		return "tienda/carrito";
 	}
 	
 	@GetMapping("/compras")
 	public String compras(Model model) {
 		
-		return "compras";
+		return "tienda/compras";
 	}
 }

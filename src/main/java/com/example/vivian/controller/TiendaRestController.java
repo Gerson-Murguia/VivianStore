@@ -39,4 +39,6 @@ public class TiendaRestController {
 			return new ResponseEntity<List<AppProducto>>(productos,HttpStatus.OK);
 		}
 	}
+	
+	
 }
