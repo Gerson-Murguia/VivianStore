@@ -5,7 +5,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" href="img/iconos/favicon.ico">
-<title> 🍽 VivianRestaurant</title>
+<title> 🍽 Vivian Restaurant</title>
 	<!-- CSS AQUI -->
 <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="/css/Site.css" rel="stylesheet" type="text/css"/>
@@ -20,8 +20,14 @@
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-4" href="/vivian/" style="width:200px !important">VIVIAN RESTAURANT</a>
             <!-- Sidebar Toggle-->
-            <button class="btn btn-dark btn-ver-categoria" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i>Categorias</button>
-
+			<ul class="navbar-nav me-2">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle btn-ver-categoria" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bars"></i> Categorias</a>
+                    <ul class="dropdown-menu dropdown-menu-end row-categoria" aria-labelledby="navbarDropdown">
+                        <li></li>
+                    </ul>
+                </li>
+            </ul>
             <!-- Navbar-->
                     <form action="/vivian/carrito" method="post" class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                         <button class="btn btn-close-white" type="submit">
@@ -45,7 +51,7 @@
         </div>
     </nav>
     <main class="container-fluid" layout:fragment="content">
-        
+        <!-- Tienda -->
     </main>
     <div class="position-fixed top-0 end-0 p-3 mt-5" style="z-index: 5">
         <div id="toast-carrito" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">

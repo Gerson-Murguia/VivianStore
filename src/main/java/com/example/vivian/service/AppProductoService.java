@@ -2,6 +2,13 @@ package com.example.vivian.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.example.vivian.models.AppProducto;
 import com.example.vivian.repository.AppProductoRepository;
@@ -16,6 +23,7 @@ public class AppProductoService {
 	private final AppProductoRepository prodrepo;
 	
 	public List<AppProducto> listar(Long idcategoria){
+			
 		List<AppProducto> prod=prodrepo.findAll();
 		//Cambiar a datos para frontend
 		prod.stream().forEach((p)->{
@@ -29,15 +37,36 @@ public class AppProductoService {
 		}		
 		return prod;
 	}
+/*	TODO: Implementar listado con paginado
+	public Page<AppProducto> listarPaginado(Long idcategoria,int pagina,int size){
+		
+		Pageable paging=PageRequest.of(pagina, size,Sort.by("nombre"));
+		
+		List<AppProducto> listado=prodrepo.findAll(paging);
+		//Cambiar a datos para frontend
+		listado.stream().forEach((p)->{
+			p.setBase64(util.convertirBase64(p.getRutaImagen()));
+			p.setExtension(Files.getFileExtension(p.getRutaImagen()));
+		});	
+		//devolver solo productos de una categoria dada
+		if (idcategoria!=0){
+			//filtrar por categoria
+			listado=listado.stream().filter(x->x.getIdCategoria()==idcategoria).collect(Collectors.toList());
+		}		
+		return new PageImpl<AppProducto>(listado);
+	}*/
 	
 	public AppProducto save(AppProducto appProducto) {
 	//guardar el producto
 		return prodrepo.save(appProducto);
 	}
 	
+	//Obtiene producto con base64 y extension para frontend
 	public AppProducto getProducto(Long id) {
-		
-		return prodrepo.findById(id).get();
+		AppProducto prod=prodrepo.findById(id).get();
+		prod.setBase64(util.convertirBase64(prod.getRutaImagen()));
+		prod.setExtension(Files.getFileExtension(prod.getRutaImagen()));			
+		return prod;
 	}
 	
 	public void delete(Long id) {
@@ -47,7 +76,8 @@ public class AppProductoService {
 	//modifica todo excepto la ruta imagen
 	public AppProducto modificar(AppProducto prod) {
 		// TODO Auto-generated method stub
-		System.out.println(prod.getFechaUpdate());
+		System.out.println(prod.getIdProducto());
+	
 		AppProducto producto=this.getProducto(prod.getIdProducto());
 		System.out.println(producto.getFechaUpdate());
 		

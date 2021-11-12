@@ -115,13 +115,13 @@ public class AdminRestController {
 			//modifica todo excepto ruta imagen
 			prod=productoService.modificar(prod);
 		}
-		
+		System.out.println("Producto salio de mofificar o crear");
+		System.out.println("Estado de imagen:");
 		//El producto pasa a tener id diferente a 0, no se guardo la ruta imagen aun
 		
 		//reemplaza la ruta de imagen por la imagen especificada
 		//si recien se crea el producto entra, si se actualiza entra solo si la imagen se ha agregado
-		System.out.println(prod.getIdProducto());
-		if(!imagen.isEmpty() && prod.getIdProducto()!=0) {
+		if(imagen!=null && prod.getIdProducto()!=0) {
 			System.out.println("La imagen es no es nula o el producto no tiene id 0");
 			String extension="."+Files.getFileExtension(imagen.getOriginalFilename());
 			guardarEnRuta=guardarEnRuta+prod.getIdProducto()+extension;

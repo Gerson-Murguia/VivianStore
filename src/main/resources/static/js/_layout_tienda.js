@@ -6,7 +6,7 @@
             })
             function obtenerCantidad() {
                 jQuery.ajax({
-                    url: '@Url.Action("CantidadCarrito", "Tienda")',
+                    url: '/api/v1/vivian/cantidadCarrito',
                     type: "GET",
                     data: null,
                     dataType: "json",

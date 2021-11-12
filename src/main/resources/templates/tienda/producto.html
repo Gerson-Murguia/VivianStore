@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/_layout_tienda}">
+<head>
+<meta charset="utf-8">
+<title>Producto | Vivian Restaurant</title>
+</head>
+<body>
+<div layout:fragment="content">
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" th:src="@{${'data:image/'+producto.extension+';base64,'+producto.base64} }" alt=""></div>
+            <div class="col-md-6">
+                <div class="small mb-1" th:text="|Categoria: ${producto.idCategoria}|"> </div>
+                <h1 class="display-5 fw-bolder" th:text="${producto.nombre}"></h1>
+                <div class="fs-5 mb-5">
+                    <span th:text="|Precio: S/. ${producto.precio}|"></span>
+                </div>
+                <p class="lead" th:text="${producto.descripcion}"></p>
+                <div class="d-flex">
+                    <a href="/vivian/" class="btn btn-danger w-50 text-center me-3">
+                        <i class="fas fa-undo-alt"></i> Volver
+                    </a>
+                        <!-- Boton solo si el usuario no es administrador -->
+                            <button class="btn btn-success btn-agregar-carrito flex-shrink-0 w-50 " type="button"  th:attr="data-idproducto=${producto.idProducto}">
+                                <i class="fas fa-cart-plus"></i> Agregar al carrito
+                            </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+<th:block layout:fragment="script">
+    <script src="/js/tienda/producto.js"></script>
+</th:block>
+</body>
+</html>
