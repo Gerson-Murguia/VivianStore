@@ -25,6 +25,7 @@ public class RegistroRestController {
     public String register(@RequestBody RegistroRequest request) {
         //deberia retornar otra cosa como su httpstatus
 		//DONE:El correo se envia de forma asincrona con @Async
+		
 		return registroService.registrar(request);
     }
 

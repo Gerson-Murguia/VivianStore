@@ -2,13 +2,11 @@ package com.example.vivian.service;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.example.vivian.models.AppUsuario;
 import com.example.vivian.registro.token.ConfirmacionToken;
 import com.example.vivian.registro.token.ConfirmacionTokenService;
@@ -22,7 +20,7 @@ import lombok.AllArgsConstructor;
 //genera un constructor con parametro appUserRepository
 public class AppUsuarioService implements UserDetailsService  {
 
-	private final static String USER_NOT_FOUND_MSG="user with email %s not found";
+	private final static String USER_NOT_FOUND_MSG="Usuario con email %s no encontrado";
 	
 	
 	private final AppUsuarioRepository appUsuarioRepository;
@@ -51,8 +49,8 @@ public class AppUsuarioService implements UserDetailsService  {
 		//codificar la contraseña del usuario
 		String encodedPassword= bCryptPasswordEncoder.encode(appUsuario.getPassword());
 		appUsuario.setPassword(encodedPassword);
-		
 		//guardar al usuario(como enabled=false, hasta que confirme)
+		System.out.print(appUsuario.getAuthorities());
 		appUsuarioRepository.save(appUsuario);
 		
 		//VALIDACION DE EMAIL

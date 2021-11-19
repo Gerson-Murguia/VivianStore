@@ -1,7 +1,71 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/_layout}">
 
 <body>
-<h1 >Contenido wrapped en el layout</h1>
+<!--TODO: arreglar Links -->
+<div layout:fragment="content">
+    <h1 class="mt-4">Dashboard</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Detalle</li>
+    </ol>
+    <div class="row">
+        <div class="col-sm-4">
+            <!--1RA CARD-->
+            <div class="card bg-dark text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="fw-bold fs-4">Total Productos</div>
+                        <div id="total-productos" class="fs-4 fw-bold">Cargando...</div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" th:href="@{/admin/producto}">Ver Detalles</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <!--2 CARD-->
+            <div class="card bg-dark text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="fw-bold fs-4">Total Marcas--</div>
+                        <div id="total-marcas" class="fs-4 fw-bold">Cargando...</div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" th:href="@{/admin/marca}">Ver Detalles</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <!--3 CARD-->
+            <div class="card bg-dark text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="fw-bold fs-4">Total Categorias</div>
+                        <div id="total-categorias" class="fs-4 fw-bold">Cargando...</div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" th:href="@{/admin/categoria}">Ver Detalles</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+	      <div sec:authorize="hasRole('USER')">Text visible to user.</div>
+	      <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+	      <div sec:authentication="principal.authorities"></div>
+		  <span th:text="${#authentication.principal.nombres}"></span>
+		  <span th:text="${#authentication.principal.apellidos}"></span>
+		  <span th:text="${#authentication.principal.id}"></span>
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+    <script src="/js/admin.js"></script>
+</th:block>
 </body>
 </html>

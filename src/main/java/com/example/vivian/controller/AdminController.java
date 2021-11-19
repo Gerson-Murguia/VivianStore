@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
-	@GetMapping("/")
+	@GetMapping("/dashboard")
 	public String index(Model model) {
 		return "admin";
-	}
+	}	
 	
 	@GetMapping("/marca")
 	public String marca(Model model) {

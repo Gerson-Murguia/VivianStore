@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/_layout}">
+
+<body>
+<div layout:fragment="content">
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="#">Mantenedores</a></li>
+    <li class="breadcrumb-item active">Perfil de Usuario</li>
+</ol>
+<div class="wraper">
+                <!-- @{
+                    var rol = "";
+                    Usuario u = HttpContext.Current.Session["Usuario"] as Usuario;
+                    if (u.EsAdministrador)
+                    {
+                        rol = "ADMINISTRADOR";
+                    }
+                } -->
+                <input id="txtid" type="hidden" th:value="${#authentication.principal.id}" />
+                <form id="formNivel">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-2">
+                                <img id="img_producto" height="198" width="200" class="border border-dark" />
+                            </div>
+                            <div class="mb-2">
+                                <input class="form-control" type="file" id="imgproducto" onchange="readURL(this);">
+                            </div>
+                        </div>
+                       
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-2">
+                                <label for="cbomarca" class="form-label">Correo</label>
+                                <input type="text" class="form-control required" id="txtcorreo" th:value ="${#authentication.principal.email}" name="descripcion" autocomplete="off" readonly="readonly" />
+                            </div>
+                            <div class="mb-2">
+                                <label for="txtnombre" class="form-label">Nombres</label>
+                                <input type="text" class="form-control required" id="txtnombre" th:value ="${#authentication.principal.nombres}" name="descripcion" autocomplete="off"/>
+                            </div>
+                            <div class="mb-2">
+                                <label for="txtdescripcion" class="form-label">Apellidos</label>
+                                <input type="text" class="form-control required" id="txtapellido" th:value ="${#authentication.principal.apellidos}" name="descripcion" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-2">
+                                <label for="txtrol" class="form-label">Rol</label>
+                                <input type="text" class="form-control required" id="txtrol" readonly="readonly" th:value ="${#authentication.principal.authorities}" name="descripcion" autocomplete="off"/>
+                               
+                            </div>
+                            <div class="mb-2">
+                                <div class="form-group">
+                                    <label for="cboEstado">Estado</label>
+                                    <select id="cboEstado" class="form-select" th:value ="${#authentication.principal.enabled}" aria-selected="@u.Activo">
+                                        <option value="1">Activo</option>
+                                        <option value="0">No Activo</option>
+                                    </select>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Volver</button>
+                                <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+</div>
+</div>
+<th:block layout:fragment="script">
+    <script src="/js/usuario.js"></script>
+</th:block>
+</body>
+</html>

@@ -9,7 +9,6 @@ import com.example.vivian.email.EmailValidator;
 import com.example.vivian.models.AppUsuario;
 import com.example.vivian.registro.token.ConfirmacionToken;
 import com.example.vivian.registro.token.ConfirmacionTokenService;
-import com.example.vivian.security.AppUsuarioRol;
 import com.example.vivian.service.AppUsuarioService;
 import lombok.AllArgsConstructor;
 
@@ -39,12 +38,13 @@ public class RegistroService {
 										request.getNombre(),
 										request.getApellido(),
 										request.getEmail(),
-										request.getPassword(),
-										AppUsuarioRol.USUARIO)); 
+										request.getPassword(),"USUARIO"
+										)); 
+		System.out.println(token);
 		//TODO: cambiar rol al momento de registrar
 		/*{
 			"nombre": "Gerson",
-			"apellido": "Murguia",
+			"apellido": "Murguia",	
 			"email": "aldmurguia1@gmail.com",
 			"password":"password",
 			"rol":[{"ADMIN":"ADMIN"}]
@@ -53,7 +53,6 @@ public class RegistroService {
 		
 		emailSender.send(request.getEmail(), construirEmail(request.getNombre(), link));
 		//maildev localhost:1080
-		
 		return token;
 	}
 	

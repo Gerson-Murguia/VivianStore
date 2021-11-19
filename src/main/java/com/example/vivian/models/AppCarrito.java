@@ -14,13 +14,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tb_carrito")
 public class AppCarrito {
+	//La clase funciona como un item de carrito que se asocia a un usuario
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCarrito;
-    private AppProducto oProducto;
-    private AppUsuario oUsuario;
-    /*FK
-    * private int idUsuario;
-    * private int idProducto;
-    * */
+    //el itemcarrito solo puede tener un producto y viceversa
+    @OneToOne
+    @JoinColumn(name = "id_producto",nullable = false)
+    private AppProducto producto;
+    
+    //El usuario puede tener muchos carritos
+    @ManyToOne
+    @JoinColumn(name = "id_usuario",nullable = false)
+    private AppUsuario usuario;
 }

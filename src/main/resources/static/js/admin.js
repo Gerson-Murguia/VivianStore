@@ -1,6 +1,6 @@
 $(document).ready(function() {
     jQuery.ajax({
-        url: 'api/v1/listarProducto/0',
+        url: '/api/v1/listarProducto/0',
         type: "GET",
         data: null,
         dataType: "json",
@@ -19,7 +19,7 @@ $(document).ready(function() {
     });
 
     jQuery.ajax({
-        url: 'api/v1/listarMarca',
+        url: '/api/v1/listarMarca',
         type: "GET",
         data: null,
         dataType: "json",
@@ -38,7 +38,7 @@ $(document).ready(function() {
     });
 
     jQuery.ajax({
-        url: 'api/v1/listarCategoria',
+        url: '/api/v1/listarCategoria',
         type: "GET",
         data: null,
         dataType: "json",

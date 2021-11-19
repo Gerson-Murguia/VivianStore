@@ -25,7 +25,7 @@ public class RegistroController {
 		//TODO: cambiar index segun sea ADMIN o CLIENTE
 		//nombre de la vista html
 		//por ahora index es el index de administrador
-		return "index";
+		return "admin";
 	}
 	
 	

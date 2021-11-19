@@ -1,6 +1,5 @@
 package com.example.vivian.security.config;
 
-import static com.example.vivian.security.AppUsuarioRol.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -9,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
 import com.example.vivian.service.AppUsuarioService;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	private final AppUsuarioService appUsuarioService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	private final CustomAuthenticationSuccessHandler handler;
 
 	//configura seguridad de http
 	@Override
@@ -30,12 +32,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/login","/api/v*/**","/css/**","/img/**","/js/**","/registro","/font-awesome-free/**")
+			.antMatchers("/login","**/api/v*/**","/css/**","/img/**","/js/**","/registro","/font-awesome-free/**")
 			.permitAll()
-			/*.antMatchers("/admin/**").hasRole(ADMIN.name())*/
+			.antMatchers("/admin/**").hasAuthority("ADMIN")
+			.antMatchers("/vivian/**").hasAnyAuthority("ADMIN","USUARIO")
 			.anyRequest().authenticated()
-			.and().formLogin().loginPage("/login").permitAll()
-			.defaultSuccessUrl("/index",true)
+			.and().formLogin().loginPage("/login")
+			.successHandler(handler).permitAll()
+			//.defaultSuccessUrl("/index",true).permitAll()
 			.and().logout()
 			.logoutUrl("/logout")
 			.clearAuthentication(true)
@@ -44,7 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logoutSuccessUrl("/login");
 	}
 
-	//
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		//el parametro es el bean DaoAuthenticationProvider

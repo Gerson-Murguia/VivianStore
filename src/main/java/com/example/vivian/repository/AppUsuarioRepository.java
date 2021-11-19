@@ -17,10 +17,8 @@ public interface AppUsuarioRepository extends JpaRepository<AppUsuario, Long>{
 
 	
 	//metodos a implementar en el APPUSUARIOSERVICE
-
 	Optional<AppUsuario> findByEmail(String email);
 
-	
 	@Transactional
 	@Modifying
 	@Query("UPDATE AppUsuario a "+
