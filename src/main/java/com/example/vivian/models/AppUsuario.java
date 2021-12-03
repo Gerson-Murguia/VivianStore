@@ -7,6 +7,9 @@ import javax.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -38,7 +41,8 @@ public class AppUsuario implements UserDetails {
 	@Column
 	private Boolean enabled=false;
 	
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<AppCarrito> carrito;
 	@Transient
 	private String confirmarPassword;

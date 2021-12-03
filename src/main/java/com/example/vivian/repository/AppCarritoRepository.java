@@ -9,4 +9,5 @@ import com.example.vivian.models.AppCarrito;
 public interface AppCarritoRepository extends JpaRepository<AppCarrito, Long> {
 	
 	  List<AppCarrito> findByUsuario_Id(Long id);
+	  
 }

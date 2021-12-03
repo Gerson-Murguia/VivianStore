@@ -28,6 +28,7 @@ public class AppUsuarioService implements UserDetailsService  {
 	//para guardar el token
 	private final ConfirmacionTokenService confirmacionTokenService;
 	
+
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) {

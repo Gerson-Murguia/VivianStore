@@ -83,7 +83,7 @@ public class AdminRestController {
 	@GetMapping(path = "/listarProducto/{idCategoria}")
 	public List<AppProducto> listarProducto(@PathVariable Long idCategoria){
 		//TODO el default debe ser 0, o pasarlo manualmente haciendo el pathvariable opcional y comprobar null
-		return productoService.listar(idCategoria);
+		return productoService.listarPorCategoria(idCategoria);
 	}
 	
 

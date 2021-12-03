@@ -8,10 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
 import com.example.vivian.service.AppUsuarioService;
-
 import lombok.AllArgsConstructor;
 
 @Configuration
@@ -32,13 +29,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/login","**/api/v*/**","/css/**","/img/**","/js/**","/registro","/font-awesome-free/**")
-			.permitAll()
+			.antMatchers("/login","**/api/v*/**","/css/**","/img/**","/js/**","/registro/","/font-awesome-free/**").permitAll()
 			.antMatchers("/admin/**").hasAuthority("ADMIN")
 			.antMatchers("/vivian/**").hasAnyAuthority("ADMIN","USUARIO")
-			.anyRequest().authenticated()
-			.and().formLogin().loginPage("/login")
-			.successHandler(handler).permitAll()
+			//.anyRequest().authenticated()
+			.and().formLogin().loginPage("/login").permitAll()
+			.successHandler(handler)
 			//.defaultSuccessUrl("/index",true).permitAll()
 			.and().logout()
 			.logoutUrl("/logout")

@@ -14,17 +14,17 @@
             }
             console.log(request)
             jQuery.ajax({
-                url: '/api/v1/registro',
+                url: 'http://localhost:8080/api/v1/registro',
                 type: "POST",
                 data: JSON.stringify(request),
-               //el tipo de dato que devolvera el servidor dataType: "json",
+               	//el tipo de dato que devolvera el servidor 
+                //dataType: "string",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-
+					console.log("datos recibidos: "+data)
                     if (data) {
 						//termina pantalla de carga
                         $.LoadingOverlay("hide");
-                        //location.href = "/login";
                         //TODO: hacer un reload o limpiar los inputs
                        $('#mensaje').addClass('alert alert-dark').html('📧Revisa tu correo para confirmar tu cuenta...')
 									

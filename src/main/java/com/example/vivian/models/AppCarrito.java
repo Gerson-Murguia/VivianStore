@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,11 +22,12 @@ public class AppCarrito {
     private Long idCarrito;
     //el itemcarrito solo puede tener un producto y viceversa
     @OneToOne
-    @JoinColumn(name = "id_producto",nullable = false)
+    @JoinColumn(name = "id_producto",nullable = false,unique = true)
     private AppProducto producto;
     
     //El usuario puede tener muchos carritos
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario",nullable = false)
+    @JsonIgnore
     private AppUsuario usuario;
 }

@@ -7,30 +7,30 @@ $(document).ready(function () {
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     $.LoadingOverlay("hide");
-                    if (data.lista != null) {
-                        $.each(data.lista, function (i, item) {
+                    if (data != null) {
+                        $.each(data, function (i, item) {
                             $("<div>").addClass("card mb-2 card-producto").append(
                                 $("<div>").addClass("card-body").append(
                                     $("<div>").addClass("row").append(
                                         $("<div>").addClass("col-1").append(
-                                            $("<img>").addClass("rounded").attr({ "src": "data:image/" + item.oProducto.extension + ";base64," + item.oProducto.base64, "width": "50" })
+                                            $("<img>").addClass("rounded").attr({ "src": "data:image/" + item.producto.extension + ";base64," + item.producto.base64, "width": "50" })
                                         ),
                                         $("<div>").addClass("col-7").append(
                                             $("<div>").addClass("ml-2").append(
-                                                $("<span>").addClass("font-weight-bold d-block").text(item.oProducto.oMarca.Descripcion),
-                                                $("<span>").addClass("spec").text(item.oProducto.Nombre),
-                                                $("<span>").addClass("float-end").text("Precio Unitario : S./" + item.oProducto.Precio )
+                                                $("<span>").addClass("font-weight-bold d-block").text(item.producto.nombre),
+                                                $("<span>").addClass("spec").text(item.producto.descripcion),
+                                                $("<span>").addClass("float-end").text("Precio Unitario : S./" + item.producto.precio )
                                             )
                                         ),
                                         $("<div>").addClass("col-3").append(
                                             $("<div>").addClass("d-flex justify-content-end controles").append(
                                                 $("<button>").addClass("btn btn-outline-secondary btn-restar rounded-0").append($("<i>").addClass("fas fa-minus")).attr({ "type": "button" }),
-                                                $("<input>").addClass("form-control input-cantidad p-1 text-center rounded-0").css({ "width": "40px" }).attr({ "disabled": "disabled" }).val("1").data("precio", item.oProducto.Precio).data("idproducto", item.oProducto.IdProducto),
+                                                $("<input>").addClass("form-control input-cantidad p-1 text-center rounded-0").css({ "width": "40px" }).attr({ "disabled": "disabled" }).val("1").data("precio", item.producto.precio).data("idproducto", item.producto.idProducto),
                                                 $("<button>").addClass("btn btn-outline-secondary btn-sumar rounded-0").append($("<i>").addClass("fas fa-plus")).attr({ "type": "button" })
                                             )
                                         ),
                                         $("<div>").addClass("col-1").append(
-                                            $("<button>").addClass("btn btn-outline-danger btn-eliminar").append($("<i>").addClass("far fa-trash-alt")).data("informacion", { _IdCarrito: item.IdCarrito, _IdProducto: item.oProducto.IdProducto}),
+                                            $("<button>").addClass("btn btn-outline-danger btn-eliminar").append($("<i>").addClass("far fa-trash-alt")).data("informacion", { _idCarrito: item.idCarrito, _idProducto: item.producto.idProducto}),
                                         )
                                     )
                                 )
@@ -76,31 +76,36 @@ $(document).ready(function () {
         $(document).on('click', '.btn-eliminar', function (event) {
             var json = $(this).data("informacion");
             var card_producto = $(this).parents("div.card-producto");
+			
+            if (confirm('¿Esta seguro de eliminar?')) {
+                 jQuery.ajax({
+                        url: '/api/v1/vivian/eliminarCarrito/'+json._idCarrito,
+                        type: "DELETE",
+                        //data: JSON.stringify({ id: json.idProducto}),
+                        //dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+								console.log(data.producto.nombre);
+		                       if (data!=null) {
+		                        card_producto.remove();
+		                        obtenerPreciosPago();
+		                        obtenerCantidadProductos();
+		                        obtenerCantidad();
+		                        swal("Exito", "Se elimino el producto: "+data.producto.nombre, "success")
+		                       } else {
+		                        alert("No se pudo eliminar")
+		                        swal("Error", "No se elimino el item del carrito: "+data.producto.nombre, "error")
+		                      }
+                        },
+                        error: function (error) {
+                            console.log(error)
+                			swal("Error", "No se elimino el producto", "error")
+                        },
+                        beforeSend: function () {
 
-
-            jQuery.ajax({
-                url: '@Url.Action("EliminarCarrito", "Tienda")',
-                type: "POST",
-                data: JSON.stringify({ IdCarrito: json._IdCarrito, IdProducto: json._IdProducto }),
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    if (data.resultado) {
-                        card_producto.remove();
-                        obtenerPreciosPago();
-                        obtenerCantidadProductos();
-                        obtenerCantidad();
-                    } else {
-                        alert("No se pudo eliminar")
-                    }
-                },
-                error: function (error) {
-                    console.log(error)
-                },
-                beforeSend: function () {
-
-                },
-            });
+                        },
+                    });
+            }
 
         })
 
@@ -112,7 +117,7 @@ $(document).ready(function () {
                 var precio = parseFloat($(this).val()) * parseFloat($(this).data("precio"));
                 total = total + precio;
             });
-            $("#totalPagar").text("S/. " + total.toString());
+            $("#totalPagar").text("S/. " + total.toFixed(2));
         }
         function obtenerCantidadProductos() {
             $("#cantidad-articulos").text(" " + $("#productos-seleccionados > div.card").length.toString() + " ");
@@ -156,7 +161,7 @@ $(document).ready(function () {
 
         function ListarDepartamento() {
             jQuery.ajax({
-                url: '@Url.Action("ObtenerDepartamento", "Tienda")',
+                url: '/api/v1/vivian/obtenerDepartamento',
                 type: "POST",
                 data: null,
                 dataType: "json",
@@ -184,7 +189,7 @@ $(document).ready(function () {
 
         function ListarProvincia() {
             jQuery.ajax({
-                url: '@Url.Action("ObtenerProvincia", "Tienda")',
+                url: '/api/v1/vivian/obtenerProvincia',
                 type: "POST",
                 data: JSON.stringify({ _IdDepartamento: $("#cboDepartamento option:selected").val() }),
                 dataType: "json",
@@ -213,7 +218,7 @@ $(document).ready(function () {
 
         function ListarDistrito() {
             jQuery.ajax({
-                url: '@Url.Action("ObtenerDistrito", "Tienda")',
+                url: '/api/v1/vivian/obtenerDistrito',
                 type: "POST",
                 data: JSON.stringify({ _IdProvincia: $("#cboProvincia option:selected").val(),_IdDepartamento: $("#cboDepartamento option:selected").val() }),
                 dataType: "json",
@@ -284,7 +289,7 @@ $(document).ready(function () {
                 }
                 
                 jQuery.ajax({
-                    url: '@Url.Action("RegistrarCompra", "Tienda")',
+                    url: '/api/v1/vivian/registrarCompra',
                     type: "POST",
                     data: JSON.stringify(request),
                     dataType: "json",
@@ -292,7 +297,7 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.resultado) {
                             swal("Compra Realizada", "Pronto te informaremos la entrega de tu pedido", "success").then((value) => {
-                                 window.location.href = "@Url.Action("Index", "Tienda")";
+                                 window.location.href = "/vivian/index";
                             });
                         } else {
                             swal("Lo sentimos", "No se  pudo completar la compra", "warning");

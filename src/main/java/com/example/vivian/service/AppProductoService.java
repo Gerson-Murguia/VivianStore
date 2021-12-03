@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 public class AppProductoService {
 	private final AppProductoRepository prodrepo;
 	
-	public List<AppProducto> listar(Long idcategoria){
+	public List<AppProducto> listarPorCategoria(Long idcategoria){
 			
 		List<AppProducto> prod=prodrepo.findAll();
 		//Cambiar a datos para frontend

@@ -23,7 +23,7 @@ public class RegistroService {
 	
 
 	public String registrar(RegistroRequest request) {
-		
+		System.out.println("Ingreso a registrar");
 		boolean isValidEmail= emailValidator.test(request.getEmail());
 		
 		//si el email no es valido,tira error, modificar para dar advertencia
@@ -42,13 +42,7 @@ public class RegistroService {
 										)); 
 		System.out.println(token);
 		//TODO: cambiar rol al momento de registrar
-		/*{
-			"nombre": "Gerson",
-			"apellido": "Murguia",	
-			"email": "aldmurguia1@gmail.com",
-			"password":"password",
-			"rol":[{"ADMIN":"ADMIN"}]
-}*/
+		
 		String link="http://localhost:8080/api/v1/registro/confirmar?token="+token;
 		
 		emailSender.send(request.getEmail(), construirEmail(request.getNombre(), link));
