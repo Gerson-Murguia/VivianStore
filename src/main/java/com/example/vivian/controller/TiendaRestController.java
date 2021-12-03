@@ -129,4 +129,9 @@ public class TiendaRestController {
 	public void obtenerDistrito() {
 	
 	}
+	
+	@PostMapping(path = "/registrarCompra")
+	public void registrarCompra() {
+	
+	}
 }

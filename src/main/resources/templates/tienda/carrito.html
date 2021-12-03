@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card bg-light">
+                    <div class="card bg-dark text-white">
                         <div class="card-body">
                             <div class="row">
 
@@ -90,15 +90,35 @@
                 <form>
                     <div class="mb-1">
                         <label for="recipient-name" class="col-form-label pt-0">Departamento:</label>
-                        <select id="cboDepartamento" class="form-select control-validar"></select>
+                        <select id="cboDepartamento" class="form-select control-validar">
+                        <option>Lima</option>
+                        </select>
                     </div>
                     <div class="mb-1">
                         <label for="recipient-name" class="col-form-label">Provincia:</label>
-                        <select id="cboProvincia" class="form-select control-validar"></select>
+                        <select id="cboProvincia" class="form-select control-validar">
+                        <option>Lima</option>
+                        <option>Barranca</option>
+                                                <option>Cajatambo</option>
+                                                <option>Canta</option>
+                                                <option>Cañete</option>
+                                                <option>Huaral</option>
+                                                <option>Huarochiri</option>
+                                                <option>Huaura</option>
+                                                <option>Oyon</option>
+                        </select>
                     </div>
                     <div class="mb-1">
                         <label for="recipient-name" class="col-form-label">Distrito:</label>
-                        <select id="cboDistrito" class="form-select control-validar"></select>
+                        <select id="cboDistrito" class="form-select control-validar">                       
+                          		<option>San Juan de Lurigancho</option>
+                                 <option>Lima</option>
+                                 <option>Ate</option>
+                                 <option>Barranco</option>
+                                 <option>Breña</option>
+                                 <option>Independencia</option>
+                                 <option>Jesus Maria</option>
+                        </select>
                     </div>
                     <div class="mb-1">
                         <label for="message-text" class="col-form-label">Contacto:</label>
@@ -121,7 +141,6 @@
         </div>
     </div>
 </div>
-
 </div>
 <th:block layout:fragment="script">
     <script src="/js/carrito.js"></script>

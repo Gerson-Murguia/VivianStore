@@ -5,12 +5,12 @@
 <body>
 <!--TODO: arreglar Links -->
 <div layout:fragment="content">
-    <h1 class="mt-4">Dashboard</h1>
+    <h1 class="mt-4">Dashboard de Administrador</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Detalle</li>
+        <li class="breadcrumb-item active">Mantenimiento</li>
     </ol>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <!--1RA CARD-->
             <div class="card bg-dark text-white mb-4">
                 <div class="card-body">
@@ -25,9 +25,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <!--2 CARD-->
-            <!--  
+          <!--  <div class="col-sm-4">
+            
+          
             <div class="card bg-dark text-white mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -39,9 +39,9 @@
                     <a class="small text-white stretched-link" th:href="@{/admin/marca}">Ver Detalles</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
-            </div>-->
-        </div>
-        <div class="col-sm-4">
+            </div>
+        </div>-->
+        <div class="col-sm-6">
             <!--3 CARD-->
             <div class="card bg-dark text-white mb-4">
                 <div class="card-body">
@@ -56,12 +56,6 @@
                 </div>
             </div>
         </div>
-	      <div sec:authorize="hasRole('USER')">Text visible to user.</div>
-	      <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
-	      <div sec:authentication="principal.authorities"></div>
-		  <span th:text="${#authentication.principal.nombres}"></span>
-		  <span th:text="${#authentication.principal.apellidos}"></span>
-		  <span th:text="${#authentication.principal.id}"></span>
     </div>
 </div>
 

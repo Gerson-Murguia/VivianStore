@@ -287,21 +287,21 @@ $(document).ready(function () {
                     }
 
                 }
-                
+           	                                              
                 jQuery.ajax({
                     url: '/api/v1/vivian/registrarCompra',
                     type: "POST",
                     data: JSON.stringify(request),
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
+                    //dataType: "json",
+                    //contentType: "application/json; charset=utf-8",
                     success: function (data) {
-                        if (data.resultado) {
+                        //if (data.resultado) {
                             swal("Compra Realizada", "Pronto te informaremos la entrega de tu pedido", "success").then((value) => {
-                                 window.location.href = "/vivian/index";
+                                 window.location.href = "/vivian/";
                             });
-                        } else {
-                            swal("Lo sentimos", "No se  pudo completar la compra", "warning");
-                        }
+                        //} else {
+                          //  swal("Lo sentimos", "No se  pudo completar la compra", "warning");
+                        //}
                     },
                     error: function (error) {
                         console.log(error)

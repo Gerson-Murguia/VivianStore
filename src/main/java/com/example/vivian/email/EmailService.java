@@ -29,7 +29,7 @@ public class EmailService implements EmailSender {
 			
 			helper.setText(email,true);
 			helper.setTo(para);
-			helper.setSubject("Confirma tu cuenta de Food Store");
+			helper.setSubject("Confirma tu cuenta de Vivian Restaurant");
 			helper.setFrom("aldmurguia1@gmail.com");
 			mailSender.send(mimeMessage);
 			
